@@ -1,0 +1,17 @@
+[package]
+name = "rslua_dns64_filter"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+hickory-resolver = { version = "0.24.1", features = ["serde", "dnssec", "dnssec-ring"] }
+mlua = { version = "0.9.8", features = ["lua54", "module"] }
+netaddr2 = "0.10.0"
+
+[profile.release]
+opt-level = 3
+codegen-units = 1
+
