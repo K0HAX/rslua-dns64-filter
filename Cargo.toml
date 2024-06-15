@@ -7,11 +7,22 @@ edition = "2021"
 crate-type = ["cdylib"]
 
 [dependencies]
-hickory-resolver = { version = "0.24.1", features = ["serde", "dnssec", "dnssec-ring"] }
-mlua = { version = "0.9.8", features = ["lua54", "module"] }
+hickory-proto = "0.24.1"
+hickory-resolver = { version = "0.24.1", features = ["dnssec-ring", "serde"] }
+mlua = { version = "0.9.8", features = ["module"] }
 netaddr2 = "0.10.0"
+
+[features]
+default = ["lua54"]
+lua51 = ["mlua/lua51"]
+lua54 = ["mlua/lua54"]
 
 [profile.release]
 opt-level = 3
 codegen-units = 1
+debug = 0
+strip = "debuginfo"
+overflow-checks = true
+lto = "fat"
+panic = "unwind"
 
